@@ -8,14 +8,13 @@ class Command(BaseCommand):
 
     help = "This command seeds people"
 
-    # def add_arguments(self, parser):
-    #     parser.add_argument(
-    #         "--total", help="How many people do you want to create?", default=10
-    #     )
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--total", help="How many people do you want to create?", default=10
+        )
 
     def handle(self, *args, **options):
-        # total = int(options.get("total"))
-        total = 40
+        total = int(options.get("total"))
         seeder = Seed.seeder()
         seeder.add_entity(
             Person,
@@ -25,7 +24,7 @@ class Command(BaseCommand):
                 "kind": lambda x: choice(
                     [Person.KIND_ACTOR, Person.KIND_DIRECTOR, Person.KIND_WRITER]
                 ),
-                "photo": lambda x: f"person_images/{randint(1, 15)}.jpg",
+                "photo": lambda x: f"https://django-challenge2-hgy.s3.ap-northeast-2.amazonaws.com/uploads/person_images/{randint(1, 15)}.jpg",
             },
         )
         seeder.execute()
