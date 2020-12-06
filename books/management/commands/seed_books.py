@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 "year": lambda x: seeder.faker.year(),
                 "category": lambda x: choice(categories),
                 "writer": lambda x: choice(writers),
-                "cover_image": lambda x: f"https://django-challenge2-hgy.s3.ap-northeast-2.amazonaws.com/uploads/book_cover_images/{randint(1, 15)}.jpg",
+                "cover_image": lambda x: f"book_cover_images/{randint(1, 15)}.jpg",
             },
         )
         seeder.execute()
