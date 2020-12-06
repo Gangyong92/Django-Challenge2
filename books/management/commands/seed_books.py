@@ -10,14 +10,13 @@ class Command(BaseCommand):
 
     help = "This command seeds books"
 
-    # def add_arguments(self, parser):
-    #     parser.add_argument(
-    #         "--total", help="How many books do you want to create?", default=10
-    #     )
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--total", help="How many books do you want to create?", default=10
+        )
 
     def handle(self, *args, **options):
-        # total = int(options.get("total"))
-        total = 40
+        total = int(options.get("total"))
         categories = Category.objects.all()
         writers = Person.objects.filter(kind=Person.KIND_WRITER)
         seeder = Seed.seeder()
