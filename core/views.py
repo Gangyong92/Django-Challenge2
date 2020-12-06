@@ -25,9 +25,9 @@ def resolve_search(request):
     movies = books = people = None
 
     if term:
-        movies = Movie.objects.filter(title__startswith=term)
-        books = Book.objects.filter(title__startswith=term)
-        people = Person.objects.filter(name__startswith=term)
+        movies = Movie.objects.filter(title__contains=term)
+        books = Book.objects.filter(title__contains=term)
+        people = Person.objects.filter(name__contains=term)
 
         print(movies, books, people)
 
