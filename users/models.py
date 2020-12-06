@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import reverse
+from core import managers as core_managers
 
 
 class User(AbstractUser):
@@ -30,6 +31,7 @@ class User(AbstractUser):
         null=True,
         related_name="movie_users",
     )
+    objects = core_managers.CustomUserManager()
 
     def __str__(self):
         return self.username
