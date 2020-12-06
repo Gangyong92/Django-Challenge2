@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  {{person.name}}
+{% endblock page_title %}
+
+{% block content %}
+
+<div class="flex flex-col items-center bg-white shadow-md rounded px-8 pt-2 pb-8 mb-4">
+  <h2 class="font-bold text-3xl mb-4">{{person.name}}</h2>
+  <div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mb-4">{{person.kind}}</div>
+  <div style="background-image:url({{person.photo.url}}); height: 70vh;" class="w-1/4 bg-cover bg-center border border-gray-500 rounded-md"></div>
+  <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'people:update' person.pk %}">Edit Person</a>
+  
+  <div class="container">
+    <hr class="-mx-40 my-5"/>
+  
+    <h2 class="text-center font-bold text-3xl text-white bg-blue-400 -mx-40 mb-4 rounded py-1">Contents</h2>
+    <div class="flex flex-wrap -mx-40">
+      {% for content in contents %}
+      <div class="w-1/5 mb-10 px-2">
+        <div style="background-image:url({{content.cover_image.url}}); height: 45vh;" class="bg-cover bg-center border border-gray-500 rounded-md"></div>
+        {% if content_kind == 'movie' %}
+          <h3 class="text-xl hover:text-green-500 truncate block w-full"><a href="{% url 'movies:movie' content.pk %}">{{content.title}}</a></h3>
+        {% elif content_kind == 'book' %}
+          <h3 class="text-xl hover:text-green-500 truncate block w-full"><a href="{% url 'books:book' content.pk %}">{{content.title}}</a></h3>
+        {% endif %}
+        <h5 class="text-base text-gray-500">{{content.year}}</h5>
+      </div>
+      {% endfor %}
+    
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}

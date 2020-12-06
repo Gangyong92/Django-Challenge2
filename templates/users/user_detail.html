@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  {{user_obj.first_name}}'s Profile
+{% endblock page_title %}
+
+
+{% block content %}
+<div class="container mx-auto pb-4 w-1/2">
+  <h2 class="w-full text-center font-bold text-2xl text-white bg-green-400 mb-4 rounded py-1">{{user_obj.first_name}}'s Profile</h2>
+  <ul class="border rounded-md pt-2">
+    <li class="mb-4 px-5">
+      <h4 class="text-xl font-medium mb-1">Bio :</h4>
+      <p>{{user_obj.bio}}</p>
+      <hr />
+    </li>
+    <li class="mb-4 px-5">
+      <h4 class="text-xl font-medium mb-1">Preference :</h4>
+      <p>{{user_obj.preference}}</p>
+      <hr />
+    </li>
+    <li class="mb-4 px-5">
+      <h4 class="text-xl font-medium mb-1">Fav Book Cat :</h4>
+      <p>{{user_obj.fav_book_cat}}</p>
+      <hr />
+    </li>
+    <li class="mb-4 px-5">
+      <h4 class="text-xl font-medium mb-1">Fav Movie Cat :</h4>
+      <p>{{user_obj.fav_movie_cat}}</p>
+      <hr />
+    </li>
+  </ul>
+  <a class="text-center block bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-3 rounded w-full" href="{% url 'users:update' %}">Edit Profile</a>
+</div>
+{% endblock content %} 

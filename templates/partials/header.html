@@ -1,0 +1,12 @@
+  <header class="inset-0 container max-w-full flex justify-around bg-blue-400 text-white py-4 fixed h-20 items-center">
+    <a class="hover:text-gray-300" href="{% url 'core:home' %}">Home</a>
+    <a class="hover:text-gray-300" href="{% url 'core:search' %}">Search</a>
+    {% if user.is_authenticated %}
+      <a class="hover:text-gray-300" href="{% url 'favs:favs' %}">My Favs</a>
+      <a class="hover:text-gray-300" href="{% url 'users:logout' %}">Log Out</a>
+      <a class="hover:text-gray-300" href="{% url 'users:profile' user.pk %}">My Profile</a>
+    {% else %}
+      <a class="hover:text-gray-300" href="{% url 'users:login' %}">Log In</a>
+      <a class="hover:text-gray-300" href="{% url 'users:signup' %}">Sign Up</a>
+    {% endif %}
+  </header>

@@ -1,0 +1,10 @@
+<li class="mb-4 px-5">
+  <div class="flex justify-between items-center">
+    <h4 class="text-xl font-medium mb-1">{{review.created_by}} <span class="text-red-600 text-lg">♥︎{{review.rating}}</span></h4> 
+    {% if review.created_by == user %}
+      <a class="text-center bg-red-500 text-white w-4 h-5 text-sm -pt-1" href="{% url 'reviews:delete' review.pk %}?content_type={{type}}">X</a>
+    {% endif %}
+  </div>
+  <p>{{review.text}}</p>
+  <hr />
+</li>

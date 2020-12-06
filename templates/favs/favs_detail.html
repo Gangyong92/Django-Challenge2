@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    {{user.first_name}}'s Profile
+{% endblock page_title %}
+
+{% block content %}
+    
+<div class="container mx-auto">
+    <h2 class="text-center font-bold text-3xl text-white bg-blue-400 mb-1 rounded py-1 -mx-40">My Favorites</h2>
+    
+    <div class="px-5 -mx-40">
+        <h2 class="ml-1 text-3xl text-blue-600">Movies</h2>
+        <div class="grid my-5 grid-cols-4 gap-10">
+            {% for movie in user.fav_list.movies.all %}
+            {% include "mixins/movie.html" with movie=movie %}
+            {% endfor %}
+        </div>
+        <hr />
+    </div>
+    
+    <div class="px-5 -mx-40">
+        <h2 class="ml-1 text-3xl text-blue-600">Books</h2>
+        <div class="grid my-5 grid-cols-4 gap-10">
+            {% for book in user.fav_list.books.all  %}
+                {% include "mixins/book.html" with book=book %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+        
+{% endblock content %}

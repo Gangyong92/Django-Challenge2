@@ -1,0 +1,9 @@
+<form action="{% url 'reviews:add' obj.pk %}?content_type={{type}}" method="POST" class="h-32 mb-3 flex items-center justify-between">
+    {% csrf_token %}
+    <div class="w-3/4 h-full flex flex-col">
+        {% for field in form %}
+            {{field}}
+        {% endfor %}
+    </div>
+    <button class="bg-blue-400 hover:bg-blue-600 text-white font-bold rounded ml-4 w-1/4 h-full">Write</button>
+</form>

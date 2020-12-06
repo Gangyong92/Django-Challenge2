@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  {{book.title}}
+{% endblock page_title %}
+
+
+{% block content %}
+
+<div class="flex flex-col items-center bg-white shadow-md rounded px-8 pt-2 pb-8 mb-4">
+  <h2 class="font-bold text-3xl mb-4">{{book.title}}</h2>
+  <div style="background-image:url({{book.cover_image.url}}); height: 80vh;" class="w-1/4 bg-cover bg-center border border-gray-500 rounded-md mb-4"></div>
+  <div class="flex items-center my-2">
+    <div class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{book.year}}</div>
+    <div class="bg-orange-400 text-white px-3 shadow-md py-1 rounded-full mx-4 hover:bg-orange-600"><a href="{% url 'categories:category' book.category.pk %}">{{book.category}}</a></div>
+    <div class="text-red-600">♥︎{{book.rating}}</div>
+  </div>
+  <div class="my-2">Writer:
+    <div class="inline-block bg-white shadow-md rounded-full px-3 py-1 text-sm font-semibold text-gray-700 hover:bg-gray-300"><a href="{% url 'people:person' book.writer.pk %}">{{book.writer}}</a></div>
+  </div>
+  <div class="flex">
+    <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold mt-4 py-2 px-4 rounded" href="{% url 'books:update' book.pk %}">Edit Book</a>
+    {% if user.is_authenticated %}
+      {% include "mixins/fav_button.html" with obj=book kind='book' %}
+    {% endif %}
+  </div>
+
+  <div class="container w-1/2">
+    <hr class="my-5"/>
+    <h3 class="text-center font-bold text-3xl text-white bg-blue-400 mb-4 rounded py-1">Review</h3>
+    {% if user.is_authenticated %}
+      {% include "mixins/add_review.html" with obj=book form=form type="book" %}
+    {% endif %}
+    <ul class="border rounded-md pt-2">
+    {% for review in reviews %}
+      {% include "mixins/show_review.html" with review=review type="book" %}
+    {% endfor %}
+      <div class="mt-2 flex justify-center mb-2">
+        Page {{reviews.number}} of {{reviews.paginator.num_pages}} >>
+        {% if reviews.has_previous %}
+            <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{reviews.previous_page_number}}">
+                Previous
+            </a>
+        {% endif %}
+        {% for page in page_range %}
+          {% if page == reviews.number %}
+              <span class="font-bold px-4">{{page}}</span>
+          {% else %}
+              <a class="hover:font-bold text-black px-4" href="?page={{page}}">{{page}}</a>
+          {% endif %}
+        {% endfor %}
+        {% if reviews.has_next %}
+            <a class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded" href="?page={{reviews.next_page_number}}">
+                Next    
+            </a>
+        {% endif %}
+      </div>
+    </ul>
+  </div>
+
+</div>
+
+{% endblock content %}
