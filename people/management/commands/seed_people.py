@@ -8,13 +8,14 @@ class Command(BaseCommand):
 
     help = "This command seeds people"
 
-    def add_arguments(self, parser):
-        parser.add_argument(
-            "--total", help="How many people do you want to create?", default=10
-        )
+    # def add_arguments(self, parser):
+    #     parser.add_argument(
+    #         "--total", help="How many people do you want to create?", default=10
+    #     )
 
     def handle(self, *args, **options):
-        total = int(options.get("total"))
+        # total = int(options.get("total"))
+        total = 40
         seeder = Seed.seeder()
         seeder.add_entity(
             Person,
