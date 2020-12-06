@@ -11,6 +11,7 @@ black = "*"
 django = "==2.2.5"
 pillow = "*"
 django-seed = "*"
+django-dotenv = "*"
 
 [requires]
 python_version = "3.8"
