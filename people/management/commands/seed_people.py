@@ -16,6 +16,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # total = int(options.get("total"))
         total = 40
+        test_url = (
+            "https://django-challenge2-hgy.s3.ap-northeast-2.amazonaws.com/uploads/"
+        )
         seeder = Seed.seeder()
         seeder.add_entity(
             Person,
@@ -25,7 +28,7 @@ class Command(BaseCommand):
                 "kind": lambda x: choice(
                     [Person.KIND_ACTOR, Person.KIND_DIRECTOR, Person.KIND_WRITER]
                 ),
-                "photo": lambda x: f"https://django-challenge2-hgy.s3.ap-northeast-2.amazonaws.com/uploads/person_images/{randint(1, 15)}.jpg",
+                "photo": lambda x: f"{test_url}person_images/{randint(1, 15)}.jpg",
             },
         )
         seeder.execute()
